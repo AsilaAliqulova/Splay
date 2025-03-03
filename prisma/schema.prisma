@@ -1,10 +1,9 @@
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" 
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -33,10 +32,11 @@ model User {
   hashesToken    String?
   is_active      Boolean @default(false)
 
-  createdAt DateTime  @default(now())
-  updated   DateTime  @updatedAt
-  profile   Profile[]
-  devices   Devices[]
+  createdAt      DateTime         @default(now())
+  updated        DateTime         @updatedAt
+  profile        Profile[]
+  devices        Devices[]
+  billingHistory BillingHistory[]
 
   @@map("user")
 }
@@ -110,8 +110,8 @@ model CategoryContent {
   id         Int      @id @default(autoincrement())
   categoryId Int
   contentId  Int
-  student    Category @relation(fields: [categoryId], references: [id])
-  course     Content  @relation(fields: [contentId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
+  content     Content  @relation(fields: [contentId], references: [id])
 
   @@map("category_content")
 }
@@ -127,15 +127,17 @@ model PaymentMethod {
 model BillingHistory {
   id               Int           @id @default(autoincrement())
   userId           Int
-  amount           Float
+  amount           Decimal
   date             DateTime
   status           String
   subscriptionId   Int
   payment_methodId Int
   subscription     Subscription  @relation(fields: [subscriptionId], references: [id])
   payment_method   PaymentMethod @relation(fields: [payment_methodId], references: [id])
-  contentId        Int?
-  categoryId       Int?
+  user             User          @relation(fields: [userId], references: [id])
+
+  contentId  Int?
+  categoryId Int?
 
   @@map("billing_history")
 }
@@ -155,6 +157,7 @@ model Subscription {
   plan    SubscriptionPlans @relation(fields: [planId], references: [id])
 
   billingHistory BillingHistory[]
+
   @@map("subscription")
 }
 
@@ -169,6 +172,7 @@ model SubscriptionPlans {
   ads_enabled     Boolean
   is_active       Boolean        @default(false)
   subscription    Subscription[]
+
   @@map("subscription_plans")
 }
 
@@ -190,8 +194,8 @@ model Profile {
   searchHistory SearchHistory[]
   watchHistory  WatchHistory[]
   rating        Rating[]
-  @@map("profile")
 
+  @@map("profile")
 }
 
 model Language {
@@ -200,8 +204,8 @@ model Language {
 
   profile    Profile[]
   audioTrack AudioTrack[]
-  @@map("language")
 
+  @@map("language")
 }
 
 model Devices {
@@ -212,8 +216,8 @@ model Devices {
   ip_address  String
   last_active Int
   user        User   @relation(fields: [userId], references: [id])
-  @@map("devices")
 
+  @@map("devices")
 }
 
 model SearchHistory {
@@ -223,8 +227,8 @@ model SearchHistory {
   search_query String
 
   profile Profile @relation(fields: [profileId], references: [id])
-  @@map("search_history")
 
+  @@map("search_history")
 }
 
 model WatchHistory {
@@ -239,8 +243,8 @@ model WatchHistory {
 
   profile Profile @relation(fields: [profileId], references: [id])
   content Content @relation(fields: [contentId], references: [id])
-  @@map("watch_history")
 
+  @@map("watch_history")
 }
 
 model Rating {
@@ -252,8 +256,8 @@ model Rating {
 
   profile Profile @relation(fields: [profileId], references: [id])
   content Content @relation(fields: [contentId], references: [id])
-  @@map("rating")
 
+  @@map("rating")
 }
 
 model AudioTrack {
@@ -266,8 +270,8 @@ model AudioTrack {
   profile      Language       @relation(fields: [langId], references: [id])
   content      ContentAudio   @relation(fields: [audioId], references: [id])
   episodeAudio EpisodeAudio[]
-  @@map("audio_track")
 
+  @@map("audio_track")
 }
 
 model ContentAudio {
@@ -277,8 +281,8 @@ model ContentAudio {
 
   content    Content      @relation(fields: [contentId], references: [id])
   audioTrack AudioTrack[]
-  @@map("content_audio")
 
+  @@map("content_audio")
 }
 
 model Searies {
@@ -291,9 +295,8 @@ model Searies {
 
   profile Content  @relation(fields: [contentId], references: [id])
   season  Season[]
-  @@map("searies")
 
-  
+  @@map("searies")
 }
 
 model Season {
@@ -308,8 +311,8 @@ model Season {
 
   series  Searies   @relation(fields: [seriesId], references: [id])
   episode Episode[]
-  @@map("season")
 
+  @@map("season")
 }
 
 model Episode {
@@ -320,6 +323,7 @@ model Episode {
 
   season       Season         @relation(fields: [seasonId], references: [id])
   episodeAudio EpisodeAudio[]
+
   @@map("episode")
 }
 
@@ -331,5 +335,6 @@ model EpisodeAudio {
 
   episodet    Episode    @relation(fields: [episodetId], references: [id])
   audio_track AudioTrack @relation(fields: [audio_trackId], references: [id])
+
   @@map("episode_audio")
 }
