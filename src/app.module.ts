@@ -12,11 +12,15 @@ import { CategoryModule } from './category/category.module';
 import { CategoryContentModule } from './category_content/category_content.module';
 import { PaymentMethodModule } from './payment_method/payment_method.module';
 import { BillingHistoryModule } from './billing_history/billing_history.module';
+import { SubscriptionModule } from './subscription/subscription.module';
+import { SubscriptionPlansModule } from './subscription_plans/subscription_plans.module';
+import { ProfileModule } from './profile/profile.module';
+import { LanguageModule } from './language/language.module';
 
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule],
+  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule, SubscriptionModule, SubscriptionPlansModule, ProfileModule, LanguageModule],
   controllers: [],
   providers: [],
 })
