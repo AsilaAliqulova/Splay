@@ -16,11 +16,15 @@ import { SubscriptionModule } from './subscription/subscription.module';
 import { SubscriptionPlansModule } from './subscription_plans/subscription_plans.module';
 import { ProfileModule } from './profile/profile.module';
 import { LanguageModule } from './language/language.module';
+import { DeviceModule } from './device/device.module';
+import { SearchHistoryModule } from './search_history/search_history.module';
+import { WatchHistoryModule } from './watch_history/watch_history.module';
+import { RatingModule } from './rating/rating.module';
 
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule, SubscriptionModule, SubscriptionPlansModule, ProfileModule, LanguageModule],
+  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule, SubscriptionModule, SubscriptionPlansModule, ProfileModule, LanguageModule, DeviceModule, SearchHistoryModule, WatchHistoryModule, RatingModule],
   controllers: [],
   providers: [],
 })
