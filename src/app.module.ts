@@ -20,11 +20,17 @@ import { DeviceModule } from './device/device.module';
 import { SearchHistoryModule } from './search_history/search_history.module';
 import { WatchHistoryModule } from './watch_history/watch_history.module';
 import { RatingModule } from './rating/rating.module';
+import { AudioTrackModule } from './audio_track/audio_track.module';
+import { ContentAudioModule } from './content_audio/content_audio.module';
+import { SeariesModule } from './searies/searies.module';
+import { SeasonModule } from './season/season.module';
+import { EpisodeModule } from './episode/episode.module';
+import { EpisodeAudioModule } from './episode_audio/episode_audio.module';
 
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule, SubscriptionModule, SubscriptionPlansModule, ProfileModule, LanguageModule, DeviceModule, SearchHistoryModule, WatchHistoryModule, RatingModule],
+  imports: [ConfigModule.forRoot({ envFilePath: ".env", isGlobal: true }), PrismaModule, AdminModule, UserModule, AuthModule,  GenreImageModule, GenreModule, ContentGenresModule, ContenModule, CategoryModule, CategoryContentModule, PaymentMethodModule, BillingHistoryModule, SubscriptionModule, SubscriptionPlansModule, ProfileModule, LanguageModule, DeviceModule, SearchHistoryModule, WatchHistoryModule, RatingModule, AudioTrackModule, ContentAudioModule, SeariesModule, SeasonModule, EpisodeModule, EpisodeAudioModule],
   controllers: [],
   providers: [],
 })

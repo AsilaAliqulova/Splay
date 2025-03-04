@@ -267,8 +267,8 @@ model AudioTrack {
   file_size Float
   duration  DateTime
 
-  profile      Language       @relation(fields: [langId], references: [id])
-  content      ContentAudio   @relation(fields: [audioId], references: [id])
+  lang      Language       @relation(fields: [langId], references: [id])
+  audio      ContentAudio   @relation(fields: [audioId], references: [id])
   episodeAudio EpisodeAudio[]
 
   @@map("audio_track")
@@ -293,7 +293,7 @@ model Searies {
   createdAt     DateTime @default(now())
   updated       DateTime @updatedAt
 
-  profile Content  @relation(fields: [contentId], references: [id])
+  content Content  @relation(fields: [contentId], references: [id])
   season  Season[]
 
   @@map("searies")
